@@ -1,0 +1,301 @@
+{
+  "generated_at": "2026-04-21T11:37:35.307991+00:00",
+  "totals": {
+    "sources_configured": 36,
+    "sources_succeeded": 36,
+    "sources_failed": 0,
+    "sources_with_items": 36,
+    "items_extracted_total": 575
+  },
+  "error_type_counts": {},
+  "sources": [
+    {
+      "source_id": "ai2_news",
+      "connector": "html",
+      "items_extracted": 20,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "anthropic_news",
+      "connector": "html",
+      "items_extracted": 20,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "anthropic_research",
+      "connector": "html",
+      "items_extracted": 20,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "ap_technology",
+      "connector": "html",
+      "items_extracted": 20,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "apple_ml_research",
+      "connector": "html",
+      "items_extracted": 6,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "ars_ai",
+      "connector": "html",
+      "items_extracted": 15,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "arxiv",
+      "connector": "arxiv",
+      "items_extracted": 20,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "aws_ml_blog",
+      "connector": "rss",
+      "items_extracted": 20,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "bair_blog",
+      "connector": "html",
+      "items_extracted": 12,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "bbc_technology",
+      "connector": "rss",
+      "items_extracted": 20,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "cohere_blog",
+      "connector": "html",
+      "items_extracted": 20,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "crossref",
+      "connector": "crossref",
+      "items_extracted": 20,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "databricks_blog",
+      "connector": "html",
+      "items_extracted": 15,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "deepmind_blog",
+      "connector": "html",
+      "items_extracted": 17,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "google_ai_blog",
+      "connector": "rss",
+      "items_extracted": 20,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "google_research_pubs",
+      "connector": "html",
+      "items_extracted": 20,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "huggingface_blog",
+      "connector": "rss",
+      "items_extracted": 20,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "ieee_spectrum_data_science",
+      "connector": "rss",
+      "items_extracted": 20,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "kdnuggets",
+      "connector": "rss",
+      "items_extracted": 10,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "latent_space",
+      "connector": "rss",
+      "items_extracted": 15,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "meta_ai_research",
+      "connector": "html",
+      "items_extracted": 16,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "microsoft_research_blog",
+      "connector": "rss",
+      "items_extracted": 10,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "mit_tr_ai",
+      "connector": "rss",
+      "items_extracted": 10,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "mlops_community",
+      "connector": "html",
+      "items_extracted": 10,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "nature_machine_learning",
+      "connector": "rss",
+      "items_extracted": 20,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "nvidia_blog",
+      "connector": "rss",
+      "items_extracted": 20,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "openai_blog",
+      "connector": "rss",
+      "items_extracted": 20,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "paperswithcode",
+      "connector": "html",
+      "items_extracted": 20,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "reuters_technology",
+      "connector": "html",
+      "items_extracted": 2,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "semianalysis_ai",
+      "connector": "rss",
+      "items_extracted": 10,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "snowflake_blog",
+      "connector": "html",
+      "items_extracted": 15,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "stanford_hai",
+      "connector": "html",
+      "items_extracted": 20,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "the_gradient",
+      "connector": "rss",
+      "items_extracted": 15,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "towards_data_science",
+      "connector": "rss",
+      "items_extracted": 15,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "venturebeat_ai",
+      "connector": "rss",
+      "items_extracted": 7,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    },
+    {
+      "source_id": "wired_ai",
+      "connector": "html",
+      "items_extracted": 15,
+      "status": "succeeded",
+      "error_type": "",
+      "error_message": ""
+    }
+  ]
+}

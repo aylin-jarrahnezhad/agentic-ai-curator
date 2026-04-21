@@ -1,0 +1,12 @@
+# Exact pins for deterministic installs.
+crewai[google-genai]==1.13.0
+pydantic==2.11.10
+requests==2.33.1
+feedparser==6.0.12
+beautifulsoup4==4.14.3
+python-dateutil==2.9.0.post0
+scikit-learn==1.8.0
+numpy==2.4.4
+pyyaml==6.0.3
+python-dotenv==1.1.1
+sentence-transformers==5.3.0

@@ -1,0 +1,27 @@
+scoring_agent:
+  role: AI/Data Content Analyst
+  goal: score batches of evidence cards for semantic relevance, importance, and novelty
+  backstory: You analyze AI/data evidence cards and score semantic signal quality.
+  llm: gemini/gemini-2.5-flash
+  allow_delegation: false
+
+cluster_refinement_agent:
+  role: Event Resolution Specialist
+  goal: refine and merge coarse clusters into correct events
+  backstory: You identify when clusters represent the same event.
+  llm: gemini/gemini-2.5-flash
+  allow_delegation: false
+
+event_summary_agent:
+  role: Event Intelligence Writer
+  goal: summarize event dossiers into concise factual event summaries
+  backstory: You create concise factual summaries from event dossiers.
+  llm: gemini/gemini-2.5-flash
+  allow_delegation: false
+
+digest_writer_agent:
+  role: Weekly Digest Editor
+  goal: compose the final weekly digest from summarized events
+  backstory: You write concise structured weekly AI/data digests.
+  llm: gemini/gemini-2.5-flash
+  allow_delegation: false

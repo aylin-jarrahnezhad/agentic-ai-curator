@@ -1,0 +1,48 @@
+{
+  "sources": [
+    { "source_id": "anthropic_news", "connector": "html", "url": "https://www.anthropic.com/news", "trust_tier": 5, "source_type": "primary", "category": "company" },
+    { "source_id": "aws_ml_blog", "connector": "rss", "feed_url": "https://aws.amazon.com/blogs/machine-learning/feed/", "trust_tier": 5, "source_type": "primary", "category": "company" },
+    { "source_id": "cohere_blog", "name": "Cohere Blog", "connector": "html", "url": "https://cohere.com/blog", "article_path_prefix": "/blog/", "sitemap_url": "https://cohere.com/sitemap.xml", "trust_tier": 5, "source_type": "primary", "category": "company" },
+    { "source_id": "deepmind_blog", "connector": "html", "url": "https://deepmind.google/discover/blog/", "trust_tier": 5, "source_type": "primary", "category": "company" },
+    { "source_id": "google_ai_blog", "connector": "rss", "feed_url": "https://research.google/blog/rss/", "trust_tier": 5, "source_type": "primary", "category": "company" },
+    { "source_id": "huggingface_blog", "connector": "rss", "feed_url": "https://huggingface.co/blog/feed.xml", "trust_tier": 5, "source_type": "primary", "category": "company" },
+    { "source_id": "meta_ai_research", "connector": "html", "url": "https://ai.meta.com/blog/", "trust_tier": 5, "source_type": "primary", "category": "company" },
+    { "source_id": "microsoft_research_blog", "connector": "rss", "feed_url": "https://www.microsoft.com/en-us/research/feed/", "trust_tier": 5, "source_type": "primary", "category": "company" },
+    { "source_id": "nvidia_blog", "connector": "rss", "feed_url": "https://developer.nvidia.com/blog/feed/", "trust_tier": 5, "source_type": "primary", "category": "company" },
+    { "source_id": "openai_blog", "connector": "rss", "feed_url": "https://openai.com/news/rss.xml", "trust_tier": 5, "source_type": "primary", "category": "company" },
+
+    { "source_id": "ai2_news", "name": "Ai2 News", "access_method": "html", "connector": "html", "url": "https://allenai.org/news", "trust_tier": 5, "source_type": "primary", "category": "research" },
+    { "source_id": "anthropic_research", "name": "Anthropic Research", "connector": "html", "url": "https://www.anthropic.com/research", "trust_tier": 5, "source_type": "primary", "category": "research" },
+    { "source_id": "apple_ml_research", "name": "Apple Machine Learning Research", "connector": "html", "url": "https://machinelearning.apple.com/", "trust_tier": 5, "source_type": "primary", "category": "research" },
+    { "source_id": "arxiv", "connector": "arxiv", "api_endpoint": "https://export.arxiv.org/api/query", "trust_tier": 5, "source_type": "primary", "category": "research" },
+    { "source_id": "bair_blog", "name": "Berkeley AI Research Blog", "access_method": "html", "connector": "html", "url": "https://bair.berkeley.edu/blog/", "trust_tier": 5, "source_type": "primary", "category": "research" },
+    { "source_id": "crossref", "connector": "crossref", "api_endpoint": "https://api.crossref.org/works", "trust_tier": 5, "source_type": "primary", "category": "research" },
+    { "source_id": "google_research_pubs", "name": "Google Research Publications", "connector": "html", "url": "https://research.google/pubs/", "trust_tier": 5, "source_type": "primary", "category": "research" },
+    { "source_id": "nature_machine_learning", "name": "Nature Machine Learning", "connector": "rss", "feed_url": "https://www.nature.com/subjects/machine-learning.rss", "trust_tier": 5, "source_type": "primary", "category": "research" },
+    { "source_id": "paperswithcode", "connector": "html", "url": "https://paperswithcode.com/latest", "trust_tier": 5, "source_type": "primary", "category": "research" },
+    { "source_id": "stanford_hai", "name": "Stanford Human-Centered AI", "connector": "html", "url": "https://hai.stanford.edu/news", "trust_tier": 5, "source_type": "primary", "category": "research" },
+
+    { "source_id": "ap_technology", "connector": "html", "url": "https://apnews.com/hub/technology", "trust_tier": 5, "source_type": "secondary", "category": "news" },
+    { "source_id": "bbc_technology", "connector": "rss", "feed_url": "https://feeds.bbci.co.uk/news/technology/rss.xml", "trust_tier": 5, "source_type": "secondary", "category": "news" },
+    { "source_id": "ieee_spectrum_data_science", "connector": "rss", "feed_url": "https://spectrum.ieee.org/feeds/topic/artificial-intelligence.rss", "trust_tier": 5, "source_type": "secondary", "category": "news" },
+    { "source_id": "mit_tr_ai", "connector": "rss", "feed_url": "https://www.technologyreview.com/topic/artificial-intelligence/feed/", "trust_tier": 5, "source_type": "secondary", "category": "news" },
+    { "source_id": "reuters_technology", "connector": "html", "url": "https://www.reutersagency.com/en/topics/technology/", "trust_tier": 5, "source_type": "secondary", "category": "news" },
+
+    { "source_id": "the_gradient", "connector": "rss", "feed_url": "https://thegradient.pub/rss/", "trust_tier": 5, "source_type": "secondary", "category": "analysis" },
+
+    { "source_id": "databricks_blog", "connector": "html", "url": "https://www.databricks.com/blog", "trust_tier": 4, "source_type": "primary", "category": "company" },
+    { "source_id": "snowflake_blog", "connector": "html", "url": "https://www.snowflake.com/en/blog/", "trust_tier": 4, "source_type": "primary", "category": "company" },
+
+    { "source_id": "ars_ai", "name": "Ars Technica AI", "access_method": "html", "connector": "html", "url": "https://arstechnica.com/ai/", "trust_tier": 4, "source_type": "secondary", "category": "news" },
+    { "source_id": "venturebeat_ai", "connector": "rss", "feed_url": "https://venturebeat.com/category/ai/feed/", "trust_tier": 4, "source_type": "secondary", "category": "news" },
+    { "source_id": "wired_ai", "name": "WIRED Artificial Intelligence", "access_method": "html", "connector": "html", "url": "https://www.wired.com/tag/artificial-intelligence/", "trust_tier": 4, "source_type": "secondary", "category": "news" },
+
+    { "source_id": "latent_space", "name": "Latent Space", "connector": "rss", "feed_url": "https://www.latent.space/feed", "trust_tier": 4, "source_type": "secondary", "category": "analysis" },
+    { "source_id": "semianalysis_ai", "connector": "rss", "feed_url": "https://www.semianalysis.com/feed", "trust_tier": 4, "source_type": "secondary", "category": "analysis" },
+
+    { "source_id": "mlops_community", "name": "MLOps Community", "access_method": "html", "connector": "html", "url": "https://mlops.community/", "trust_tier": 3, "source_type": "secondary", "category": "discussion" },
+
+    { "source_id": "kdnuggets", "connector": "rss", "feed_url": "https://www.kdnuggets.com/feed", "trust_tier": 3, "source_type": "secondary", "category": "news" },
+    { "source_id": "towards_data_science", "connector": "rss", "feed_url": "https://towardsdatascience.com/feed", "trust_tier": 3, "source_type": "secondary", "category": "news" }
+  ]
+}

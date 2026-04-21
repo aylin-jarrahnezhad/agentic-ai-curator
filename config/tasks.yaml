@@ -1,0 +1,47 @@
+score_evidence_cards:
+  description: |
+    Score the provided evidence cards. Return strict JSON array of objects:
+    [{"id":"...","semantic_relevance_score":0-1,"semantic_importance_score":0-1,
+      "semantic_novelty_score":0-1,"rationale":"short"}]
+    Use this relevance policy strictly (highest to lowest):
+    1) AI / Machine Learning / Data Science core topics (highest relevance).
+    2) Data topics and infrastructure related to AI/ML systems (medium relevance).
+    3) General technology/software topics (low relevance).
+    4) Anything outside these areas (not relevant).
+    Relevance scoring bands:
+    - 0.85-1.00: directly about AI, ML, LLMs, model training/inference/evaluation, data science methods.
+    - 0.60-0.84: data engineering, analytics, MLOps, infra/platform topics clearly supporting AI/data workflows.
+    - 0.30-0.59: general technology with weak/indirect connection to AI/data.
+    - 0.00-0.29: not related to AI, data science, ML, or supporting data/infra context.
+    Do not inflate relevance for unrelated business/news/politics unless AI/data science is central.
+  expected_output: strict JSON
+
+refine_clusters:
+  description: |
+    Refine coarse clusters. Merge ONLY when two clusters clearly describe the same single real-world
+    event (same announcement, same paper/study, same product release, same incident)—evidence must align
+    in what happened, not merely the same broad topic (e.g. both "about AI" is NOT enough).
+    If titles refer to different subjects, products, organizations, or stories, do NOT merge.
+    When uncertain, keep clusters separate (prefer false split over false merge).
+    Additional hard constraints:
+    - Never collapse all or most clusters into one generic bucket.
+    - Never map unrelated clusters to a single id just because they are in the same domain/topic.
+    - Keep one-to-one mapping unless there is explicit, concrete overlap in event evidence.
+    - Every output mapping must preserve event granularity and avoid broad umbrella merges.
+    Return strict JSON: {"cluster_mapping": {"old_cluster_id":"refined_cluster_id"},
+    "labels": {"refined_cluster_id":"canonical event label"}}
+  expected_output: strict JSON
+
+summarize_event_dossiers:
+  description: |
+    Summarize event dossiers. Return strict JSON array:
+    [{"event_id":"...","title":"...","summary":"...","why_it_matters":"...",
+      "confidence_note":"...","theme_label":"..."}]
+  expected_output: strict JSON
+
+compose_weekly_digest:
+  description: |
+    Compose markdown-ready digest sections from final ranked events and diagnostics.
+    Return markdown with sections: executive_summary, top_developments, research_highlights,
+    company_platform_moves, ecosystem_themes, methodology_note.
+  expected_output: structured markdown

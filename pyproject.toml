@@ -1,0 +1,68 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "weekly-ai-data-digest"
+version = "0.1.0"
+description = "Weekly AI/Data digest pipeline with CrewAI reasoning"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "--cov=core --cov=config --cov=services/storage --cov=services/digest --cov=run_pipeline --cov-report=term-missing --cov-fail-under=85"
+
+[tool.setuptools]
+packages = ["config", "core", "crews", "models", "services", "utils"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_unused_configs = true
+ignore_missing_imports = true
+follow_imports = "skip"
+disable_error_code = ["import-untyped"]
+check_untyped_defs = true
+pretty = true
+show_error_codes = true
+files = [
+  "config",
+  "core",
+  "run_pipeline.py",
+  "services/digest",
+  "services/storage",
+  "utils/json_utils.py",
+]
+
+[tool.black]
+line-length = 120
+target-version = ["py311"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+src = ["config", "core", "crews", "models", "services", "tests", "utils"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["config", "core", "crews", "models", "services", "utils"]
+
+[tool.ruff.lint.per-file-ignores]
+"crews/digest_crew.py" = ["E501"]
+"models/raw_item.py" = ["E501"]
+"scripts/audit_extraction.py" = ["E501"]
+"services/clustering/cluster_refinement_service.py" = ["E501"]
+"services/clustering/embedding_service.py" = ["E501"]
+"services/digest/digest_composer.py" = ["E501"]
+"services/digest/digest_html_assets.py" = ["E501"]
+"services/digest/digest_html_renderer.py" = ["E501"]
+"services/digest/digest_html_template.py" = ["E501"]
+"services/digest/summary_utils.py" = ["E501"]
+"tests/test_summary_utils.py" = ["E501"]
+"utils/json_utils.py" = ["E501"]
+"utils/text.py" = ["E501"]
+
+[tool.coverage.run]
+data_file = ".pytest_cache/.coverage"
