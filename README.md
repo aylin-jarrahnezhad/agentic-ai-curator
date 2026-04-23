@@ -1,40 +1,121 @@
-# Agentic AI Digest — Turning AI News into Structured Insight
+# Agentic AI Digest — From Fragmented AI News to Structured Insight
 
 Keeping up with AI means navigating many fragmented sources: company blogs, research platforms, and media outlets.
 
-This project demonstrates how to build an **agentic AI pipeline** that consolidates, filters, and prioritizes that information into a clear, searchable digest.
+This project demonstrates how to build an **agentic AI pipeline** that consolidates, filters, and prioritizes fragmented information into a structured, searchable digest—reducing the effort of scanning multiple sources into a single view.
+
+👉 The goal: **help decide what deserves attention**
+
+
+## 🚀 Live Demo
+
+👉 https://aylin-jarrahnezhad.github.io/agentic-ai-curator/
+
+Explore the full interactive digest (search, filtering, sorting, and clustering).
+
+## Example Output
+
+### 🔎 Structured Digest with Search & Filters
+
+![Digest Overview](docs/images/title_and_filters.jpg)
+
+*A consolidated view across multiple sources with filtering, sorting, and search*
+
+
+### 🧠 Ranked and Summarized Insights
+
+![Single Article](docs/images/single_news.jpg)
+
+*Each item is scored (relevance, importance, novelty), summarized, and linked to original sources*
+
+
+### 🔗 Multi-Source Clustering
+
+![Clustered News](docs/images/clustered_news.jpg)
+
+*Related articles from different sources are grouped into coherent topics*
 
 
 ## What It Does
 
 - 📥 Collects updates from curated, reliable sources  
 - 🧹 Cleans, normalizes, and deduplicates content  
-- 🧠 Scores articles (relevance, importance, novelty) using LLMs  
+- 🧠 Scores articles across relevance, importance, and novelty using LLMs 
 - 🔗 Clusters related items using embeddings  
 - ✍️ Generates concise summaries  
 - 📊 Produces a ranked, filterable digest  
 
-👉 Focus: **helping decide what deserves attention**
-
 Sources are configured in [`config/source_registry.json`](config/source_registry.json).
 
 
-## Example Output
+## Why This Matters
 
-Digest Example: [outputs/latest.html](outputs/latest.html)
+AI information is distributed across many independent and reliable sources.
+
+This system helps:
+- reduce time spent scanning multiple websites  
+- prioritize high-impact updates  
+- navigate information more efficiently  
 
 
 ## About This Project
 
-This is a practical showcase of:
+This is an MVP and practical showcase of:
 
-- agentic AI workflows  
+- designing **agentic AI workflows**  
 - combining deterministic pipelines with LLM-based reasoning  
 - building inspectable, production-style systems  
-- optimizing for cost using open models  
+- optimizing GenAI systems for cost using open models  
+
+The focus is on demonstrating **system design, trade-offs, and practical implementation**.
+
+## Notes on Evaluation
+
+This project does not include a formal LLM evaluation pipeline, by design.
+
+The focus of this MVP is on **end-to-end system design and practical usability**, rather than model benchmarking.
+
+Two considerations guided this decision:
+
+- **Summarization task**  
+  LLMs are generally reliable for summarization when grounded in source text and paired with references.
+  In this system, summaries are tied to original articles and always include references, reducing the risk of misleading outputs.
+
+- **Scoring task (relevance, importance, novelty)**  
+  These dimensions are inherently subjective and would require a labeled dataset to evaluate rigorously.  
+  In the absence of such data, LLM-based scoring was used as a practical proxy, with outputs validated through manual inspection.
+
+Overall, the system prioritizes:
+- deterministic preprocessing for consistency  
+- LLM usage where semantic judgment is required  
+
+In a production setting, this could be extended with:
+- labeled evaluation datasets  
+- quantitative scoring benchmarks  
+- human-in-the-loop validation workflows  
+
+## Guardrails and Robustness
+
+The system includes lightweight guardrails to improve reliability:
+
+- strict task schemas for LLM outputs (e.g., structured JSON for scoring and clustering)
+- explicit constraints in prompts (e.g., conservative clustering rules)
+- retry mechanisms for LLM calls (including backoff/cooldown behavior)
+- observable intermediate artifacts and diagnostics for inspection
+- deterministic fallback paths when LLM stages fail (for scoring, clustering refinement, summarization, and digest composition)
+
+
+At this stage, the system does not include some more advanced resilience patterns, such as:
+
+- model fallback (switching between providers/models on failure)
+- automatic JSON repair loops (it uses lenient parsing/extraction, but not iterative repair/re-prompt cycles)
+
+These are intentional MVP trade-offs, prioritizing simplicity, inspectability, and predictable behavior over full production-grade robustness.
 
 
 ## Pipeline at a Glance
+
+Fetch → Normalize → Deduplicate → Score → Cluster → Summarize → Render
 
 ```mermaid
 flowchart LR

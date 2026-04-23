@@ -18,6 +18,8 @@ class APIFetcher:
                 "search_query": "all:artificial intelligence",
                 "start": 0,
                 "max_results": max_items,
+                "sortBy": "submittedDate",
+                "sortOrder": "descending",
             }
             response = requests.get(source["api_endpoint"], params=params, timeout=self.timeout)
             response.raise_for_status()
