@@ -1,5 +1,5 @@
 -r requirements.txt
-pytest==9.0.3
+pytest==9.0.2
 mypy==1.18.2
 black
 pytest-cov
