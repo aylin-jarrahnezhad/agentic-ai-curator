@@ -6,6 +6,12 @@ This project demonstrates how to build an **agentic AI pipeline** that consolida
 
 👉 The goal: **help decide what deserves attention**
 
+## TL;DR
+
+- Aggregates AI updates from multiple trusted sources into one ranked, searchable digest.
+- Combines deterministic preprocessing with LLM scoring/summarization and clustering.
+- Produces inspectable local artifacts (digest + diagnostics) for transparent debugging.
+
 
 ## 🚀 Live Demo
 
@@ -34,6 +40,19 @@ Explore the full interactive digest (search, filtering, sorting, and clustering)
 ![Clustered News](docs/images/clustered_news.jpg)
 
 *Related articles from different sources are grouped into coherent topics*
+
+
+## Outputs and Diagnostics
+
+Running the pipeline generates structured outputs at each stage, including:
+
+- final digest (HTML and Markdown)
+- scored and clustered items
+- fetch reports and diagnostics
+
+👉 See full details: [Outputs and Diagnostics](docs/outputs-and-diagnostics.md)
+
+These artifacts make the system fully inspectable and support debugging and validation without relying on black-box behavior.
 
 
 ## What It Does
@@ -125,8 +144,8 @@ flowchart LR
   D --> E[Cluster + Refine]
   E --> F[Digest Render]
   E --> G[Diagnostics]
-  F --> H[outputs/latest.html]
-  G --> I[weekly_diagnostics_YYYY_MM_DD.md]
+  F --> H[local outputs/latest.html]
+  G --> I[local weekly_diagnostics_YYYY_MM_DD.md]
 ```
 
 ## Start Here
@@ -147,7 +166,8 @@ flowchart LR
 python run_pipeline.py --stage all
 ```
 
-Outputs are written to [`outputs/`](outputs/).
+Outputs are written to `outputs/`.
+These files are generated locally per run and are gitignored.
 
 ## Docker
 
