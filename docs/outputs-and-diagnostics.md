@@ -15,6 +15,41 @@
 - `fetch_report.json`: per-source fetch counts, statuses, error details.
 - `fetch_report_summary.md`: human-readable fetch summary.
 
+## CrispyBrain Memory Export
+
+Use the export helper after a pipeline run to drop article memories into CrispyBrain:
+
+```bash
+python scripts/export_crispybrain_memories.py
+```
+
+By default, the helper finds a sibling CrispyBrain repo at `../crispybrain` and writes plain-text inbox files to:
+
+```text
+inbox/curated-articles/
+```
+
+The CrispyBrain display name is preserved as `Curated Articles`.
+The filesystem-safe project slug is `curated-articles`, matching CrispyBrain's existing inbox slug rules.
+
+Output selection uses this fallback order:
+
+- `clustered_items.json`
+- `scored_items.json`, filtered to `scores.composed >= 0.7`
+- `raw_items.json`
+
+All source categories are included.
+Each generated memory preserves the title, source/publisher identifier when available, URL, publish/fetch date, summary/body/excerpt text, score metadata, and tags/categories/filter metadata available from the selected curator output.
+Existing identical files are skipped so repeated exports do not churn the inbox.
+
+To target a different CrispyBrain checkout or threshold:
+
+```bash
+python scripts/export_crispybrain_memories.py \
+  --crispybrain-root /path/to/crispybrain \
+  --scored-min-composed 0.7
+```
+
 ## Diagnostics Structure
 
 The diagnostics markdown emphasizes:
