@@ -7,12 +7,14 @@ import argparse
 import hashlib
 import json
 import re
+import urllib.error
+import urllib.request
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
 PROJECT_DISPLAY_NAME = "Curated Articles"
-PROJECT_SLUG = "curated-articles"
+PROJECT_SLUG = PROJECT_DISPLAY_NAME
 PROJECT_METADATA_FILE = ".crispybrain-projects.json"
 DEFAULT_SCORED_MIN_COMPOSED = 0.7
 
@@ -123,7 +125,7 @@ def _date_label(row: dict[str, Any], *, stage: str) -> str:
 
 
 def _tags_for(row: dict[str, Any], *, stage: str) -> list[str]:
-    tags = ["agentic-ai-curator", "curated-articles", stage]
+    tags = ["agentic-ai-curator", PROJECT_SLUG, stage]
     for key in ("category", "source_type", "connector", "scoring_source"):
         value = _content_or_none(row.get(key))
         if value:
@@ -206,23 +208,38 @@ def export_memories(
     outputs_dir: Path,
     crispybrain_root: Path,
     scored_min_composed: float = DEFAULT_SCORED_MIN_COMPOSED,
+    crispybrain_import_url: str | None = None,
 ) -> ExportResult:
     stage, source_path, rows = select_article_rows(outputs_dir, scored_min_composed=scored_min_composed)
     inbox_dir = crispybrain_root / "inbox"
     destination_dir = inbox_dir / PROJECT_SLUG
-    destination_dir.mkdir(parents=True, exist_ok=True)
-    ensure_project_metadata(inbox_dir)
 
+    rendered_files = [
+        {
+            "filename": memory_filename(row, stage=stage),
+            "content": render_memory(row, stage=stage),
+            "source": "agentic-ai-curator",
+        }
+        for row in rows
+    ]
     files_written = 0
     files_skipped = 0
-    for row in rows:
-        content = render_memory(row, stage=stage)
-        destination = destination_dir / memory_filename(row, stage=stage)
-        if destination.exists() and destination.read_text(encoding="utf-8") == content:
-            files_skipped += 1
-            continue
-        destination.write_text(content, encoding="utf-8")
-        files_written += 1
+    if crispybrain_import_url:
+        files_written, files_skipped = import_memories_via_endpoint(
+            crispybrain_import_url,
+            rendered_files,
+        )
+    else:
+        destination_dir.mkdir(parents=True, exist_ok=True)
+        ensure_project_metadata(inbox_dir)
+        for rendered_file in rendered_files:
+            content = rendered_file["content"]
+            destination = destination_dir / rendered_file["filename"]
+            if destination.exists() and destination.read_text(encoding="utf-8") == content:
+                files_skipped += 1
+                continue
+            destination.write_text(content, encoding="utf-8")
+            files_written += 1
 
     return ExportResult(
         source_stage=stage,
@@ -233,6 +250,56 @@ def export_memories(
         candidates_seen=len(rows),
         candidates_exported=len(rows),
     )
+
+
+def import_memories_via_endpoint(import_url: str, files: list[dict[str, str]]) -> tuple[int, int]:
+    payload = {
+        "project_slug": PROJECT_SLUG,
+        "files": files,
+    }
+    encoded_body = json.dumps(payload).encode("utf-8")
+    request = urllib.request.Request(
+        import_url,
+        data=encoded_body,
+        headers={
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=30) as response:
+            response_status = response.status
+            response_body = response.read()
+    except urllib.error.HTTPError as exc:
+        try:
+            response_status = exc.code
+            response_body = exc.read()
+        finally:
+            exc.close()
+    except urllib.error.URLError as exc:
+        raise RuntimeError(f"CrispyBrain import endpoint is unavailable: {exc.reason}") from exc
+
+    try:
+        response_payload = json.loads(response_body.decode("utf-8"))
+    except json.JSONDecodeError as exc:
+        raise RuntimeError(f"CrispyBrain import endpoint returned non-JSON status {response_status}.") from exc
+
+    saved = response_payload.get("saved")
+    rejected = response_payload.get("rejected")
+    if not isinstance(saved, list) or not isinstance(rejected, list):
+        raise RuntimeError("CrispyBrain import endpoint returned an invalid response shape.")
+
+    duplicate_count = sum(
+        1 for item in rejected if isinstance(item, dict) and item.get("reason") == "file already exists"
+    )
+    hard_rejections = [
+        item for item in rejected if not (isinstance(item, dict) and item.get("reason") == "file already exists")
+    ]
+    if response_status >= 400 and hard_rejections:
+        raise RuntimeError(f"CrispyBrain import rejected files: {hard_rejections}")
+
+    return len(saved), duplicate_count
 
 
 def default_crispybrain_root(curator_root: Path) -> Path:
@@ -264,6 +331,11 @@ def build_parser() -> argparse.ArgumentParser:
         default=DEFAULT_SCORED_MIN_COMPOSED,
         help="Minimum composed score when falling back to scored_items.json. Defaults to 0.7.",
     )
+    parser.add_argument(
+        "--crispybrain-import-url",
+        default=None,
+        help="Optional CrispyBrain JSON import endpoint, for example http://localhost:8787/api/inbox/import.",
+    )
     return parser
 
 
@@ -276,6 +348,7 @@ def main() -> int:
         outputs_dir=args.outputs_dir,
         crispybrain_root=crispybrain_root,
         scored_min_composed=args.scored_min_composed,
+        crispybrain_import_url=args.crispybrain_import_url,
     )
     print(f"CrispyBrain export complete: {result.source_stage} -> {result.destination_dir}")
     print(f"- source: {result.source_path}")

@@ -26,11 +26,11 @@ python scripts/export_crispybrain_memories.py
 By default, the helper finds a sibling CrispyBrain repo at `../crispybrain` and writes plain-text inbox files to:
 
 ```text
-inbox/curated-articles/
+inbox/Curated Articles/
 ```
 
-The CrispyBrain display name is preserved as `Curated Articles`.
-The filesystem-safe project slug is `curated-articles`, matching CrispyBrain's existing inbox slug rules.
+The CrispyBrain project key is exactly `Curated Articles`.
+The exporter preserves that capitalization and space in the rendered memory content, the direct inbox folder, and the optional CrispyBrain import endpoint payload.
 
 Output selection uses this fallback order:
 
@@ -48,6 +48,13 @@ To target a different CrispyBrain checkout or threshold:
 python scripts/export_crispybrain_memories.py \
   --crispybrain-root /path/to/crispybrain \
   --scored-min-composed 0.7
+```
+
+When the CrispyBrain local UI is running, prefer the JSON inbox import endpoint:
+
+```bash
+python scripts/export_crispybrain_memories.py \
+  --crispybrain-import-url http://localhost:8787/api/inbox/import
 ```
 
 ## Diagnostics Structure

@@ -177,7 +177,8 @@ After running the pipeline, export article memories into CrispyBrain's inbox:
 python scripts/export_crispybrain_memories.py
 ```
 
-The exporter writes `.txt` memory files to CrispyBrain project `Curated Articles`, using the existing safe inbox slug `curated-articles`.
+The exporter writes `.txt` memory files to CrispyBrain project key `Curated Articles`, preserving the capitalization and space in the inbox folder and Q&A project selector.
+When CrispyBrain's local UI is running, pass `--crispybrain-import-url http://localhost:8787/api/inbox/import` to send the files through the inbox import endpoint instead of writing directly to disk.
 It chooses the richest available curator output in this order: `clustered_items.json`, then `scored_items.json`, then `raw_items.json`.
 When it falls back to scored items, it exports only items with `scores.composed >= 0.7`.
 All source categories are eligible.
