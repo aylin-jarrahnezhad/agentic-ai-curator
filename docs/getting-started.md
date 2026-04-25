@@ -68,3 +68,22 @@ python run_pipeline.py --stage digest
 ```
 
 Use this mode when debugging a specific stage.
+
+## Drop Article Memories into CrispyBrain
+
+After a full run or staged run has produced outputs, export the selected article memories into CrispyBrain:
+
+```bash
+python scripts/export_crispybrain_memories.py
+```
+
+The command writes CrispyBrain inbox `.txt` files for display project `Curated Articles`.
+The project key is exactly `Curated Articles`; the exporter preserves the capitalization and space in the inbox folder and Q&A project selector.
+When CrispyBrain's local UI is running, use the import endpoint path:
+
+```bash
+python scripts/export_crispybrain_memories.py \
+  --crispybrain-import-url http://localhost:8787/api/inbox/import
+```
+
+It uses `clustered_items.json` when available, otherwise scored items with `scores.composed >= 0.7`, otherwise raw fetched items.
